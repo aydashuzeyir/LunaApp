@@ -1,483 +1,423 @@
-const root = document.documentElement;
-
-/* =========================
-   LUNA APP
-   ========================= */
-
-const apps = [
-    {
-        name: "Luna Music",
-        icon: "🎵",
-        category: "music",
-        description: "Musiqilərini rahat dinlə."
-    },
-    {
-        name: "Luna Video",
-        icon: "🎬",
-        category: "video",
-        description: "Videolar üçün Luna player."
-    },
-    {
-        name: "Luna AI",
-        icon: "🤖",
-        category: "ai",
-        description: "Süni intellekt ilə söhbət et."
-    },
-    {
-        name: "Luna Tools",
-        icon: "🛠️",
-        category: "tools",
-        description: "Faydalı alətlər bir yerdə."
-    }
-];
-
-const updates = [
-    {
-        title: "Luna App 1.0",
-        text: "Luna App istifadəyə verildi."
-    },
-    {
-        title: "AI bölməsi",
-        text: "Luna AI bölməsi əlavə edildi."
-    },
-    {
-        title: "Yeni dizayn",
-        text: "Yeni rəng və şrift seçimləri əlavə edildi."
-    }
-];
-
-
-/* =========================
-   APP CARDS
-   ========================= */
-
-const appGrid = document.getElementById("appGrid");
-
-function showApps(list = apps) {
-
-    if (!appGrid) return;
-
-    appGrid.innerHTML = "";
-
-    list.forEach(app => {
-
-        const card = document.createElement("div");
-
-        card.className = "app-card";
-
-        card.innerHTML = `
-            <div class="app-icon">${app.icon}</div>
-            <h3>${app.name}</h3>
-            <p>${app.description}</p>
-            <button class="btn btn-primary">
-                Aç
-            </button>
-        `;
-
-        appGrid.appendChild(card);
-    });
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-showApps();
-
-
-/* =========================
-   SEARCH
-   ========================= */
-
-const searchInput = document.getElementById("searchInput");
-
-if (searchInput) {
-
-    searchInput.addEventListener("input", () => {
-
-        const value = searchInput.value.toLowerCase().trim();
-
-        const filtered = apps.filter(app =>
-            app.name.toLowerCase().includes(value) ||
-            app.description.toLowerCase().includes(value)
-        );
-
-        showApps(filtered);
-    });
+:root {
+    --bg: #0b0712;
+    --card: #171020;
+    --card2: #21152f;
+    --text: #ffffff;
+    --muted: #aaa0b5;
+    --primary: #9b5cff;
+    --primary2: #7137c9;
+    --border: rgba(255,255,255,0.08);
 }
 
-
-/* =========================
-   CATEGORIES
-   ========================= */
-
-const categoryButtons =
-    document.querySelectorAll(".category-btn");
-
-categoryButtons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        categoryButtons.forEach(btn =>
-            btn.classList.remove("active")
-        );
-
-        button.classList.add("active");
-
-        const category = button.dataset.category;
-
-        if (!category || category === "all") {
-            showApps();
-            return;
-        }
-
-        showApps(
-            apps.filter(app =>
-                app.category === category
-            )
-        );
-    });
-});
-
-
-/* =========================
-   UPDATES
-   ========================= */
-
-const updatesList =
-    document.getElementById("updatesList");
-
-if (updatesList) {
-
-    updatesList.innerHTML = "";
-
-    updates.forEach(update => {
-
-        const item = document.createElement("div");
-
-        item.className = "update-card";
-
-        item.innerHTML = `
-            <h3>${update.title}</h3>
-            <p>${update.text}</p>
-        `;
-
-        updatesList.appendChild(item);
-    });
+body {
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
 }
 
+/* Yuxarı hissə */
 
-/* =========================
-   THEME
-   ========================= */
-
-const themeButton =
-    document.getElementById("themeButton");
-
-function setTheme(theme) {
-
-    if (theme === "light") {
-        document.body.classList.add("light");
-    } else {
-        document.body.classList.remove("light");
-    }
-
-    localStorage.setItem("luna-theme", theme);
+.topbar {
+    width: 100%;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
 }
 
-const savedTheme =
-    localStorage.getItem("luna-theme") || "dark";
-
-setTheme(savedTheme);
-
-if (themeButton) {
-
-    themeButton.addEventListener("click", () => {
-
-        const isLight =
-            document.body.classList.contains("light");
-
-        setTheme(isLight ? "dark" : "light");
-    });
+.logo {
+    font-size: 22px;
+    font-weight: bold;
 }
 
+.logo span {
+    color: var(--primary);
+}
 
-/* =========================
-   COLORS
-   ========================= */
+.top-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-const colorButtons =
-    document.querySelectorAll(".color-option");
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 9px 12px;
+}
 
-colorButtons.forEach(button => {
+.search-box input {
+    width: 150px;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: white;
+    font-size: 14px;
+}
 
-    button.addEventListener("click", () => {
+.search-box input::placeholder {
+    color: var(--muted);
+}
 
-        const color = button.dataset.color;
+.icon-button {
+    border: 0;
+    background: var(--card);
+    color: white;
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+    cursor: pointer;
+    font-size: 20px;
+}
 
-        if (!color) return;
+/* Əsas hissə */
 
-        root.style.setProperty(
-            "--primary",
-            color
-        );
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 35px 20px 100px;
+}
 
-        localStorage.setItem(
-            "luna-color",
-            color
-        );
+.welcome {
+    text-align: center;
+    margin-bottom: 35px;
+}
 
-        colorButtons.forEach(btn =>
-            btn.classList.remove("active")
-        );
+.welcome h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
 
-        button.classList.add("active");
-    });
-});
+.welcome p {
+    color: var(--muted);
+}
 
-const savedColor =
-    localStorage.getItem("luna-color");
+/* Kartlar */
 
-if (savedColor) {
-    root.style.setProperty(
-        "--primary",
-        savedColor
+.section-title {
+    margin-bottom: 15px;
+}
+
+.section-title h2 {
+    font-size: 22px;
+}
+
+.app-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 15px;
+}
+
+.app-card {
+    background: linear-gradient(
+        145deg,
+        var(--card),
+        var(--card2)
     );
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: 0.2s;
 }
 
+.app-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+}
 
-/* =========================
-   FONT
-   ========================= */
+.app-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 27px;
+    background: rgba(155,92,255,0.15);
+}
 
-const fontSelect =
-    document.getElementById("fontSelect");
+.app-info {
+    flex: 1;
+}
 
-if (fontSelect) {
+.app-info h3 {
+    margin-bottom: 5px;
+}
 
-    const savedFont =
-        localStorage.getItem("luna-font");
+.app-info p {
+    color: var(--muted);
+    font-size: 13px;
+}
 
-    if (savedFont) {
+.app-card button {
+    border: 0;
+    background: var(--primary);
+    color: white;
+    border-radius: 11px;
+    padding: 9px 14px;
+    cursor: pointer;
+    font-weight: bold;
+}
 
-        fontSelect.value = savedFont;
+.no-results {
+    display: none;
+    text-align: center;
+    color: var(--muted);
+    margin-top: 30px;
+}
 
-        root.style.setProperty(
-            "--font-family",
-            savedFont
-        );
+/* Popup */
+
+.popup {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.popup.show {
+    display: flex;
+}
+
+.popup-content {
+    width: 100%;
+    max-width: 430px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 20px;
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.close-button {
+    border: 0;
+    background: transparent;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.setting-item {
+    margin-bottom: 17px;
+}
+
+.setting-item label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.setting-item select,
+.setting-item input[type="file"] {
+    width: 100%;
+    padding: 11px;
+    border-radius: 11px;
+    border: 1px solid var(--border);
+    background: var(--card2);
+    color: white;
+}
+
+.setting-item input[type="color"] {
+    width: 55px;
+    height: 40px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.reset-button {
+    width: 100%;
+    padding: 12px;
+    border: 0;
+    border-radius: 12px;
+    background: #33233f;
+    color: white;
+    cursor: pointer;
+}
+
+/* Luna AI */
+
+.ai-floating-button {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 58px;
+    height: 58px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    font-size: 27px;
+    cursor: pointer;
+    z-index: 900;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+
+.ai-window {
+    display: none;
+    position: fixed;
+    right: 20px;
+    bottom: 90px;
+    width: 350px;
+    max-width: calc(100vw - 40px);
+    height: 500px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    overflow: hidden;
+    z-index: 950;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+}
+
+.ai-window.show {
+    display: flex;
+    flex-direction: column;
+}
+
+.ai-header {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.ai-header small {
+    display: block;
+    color: var(--muted);
+    margin-top: 3px;
+}
+
+.ai-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.ai-message {
+    background: var(--card2);
+    padding: 11px 13px;
+    border-radius: 14px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.user-message {
+    background: var(--primary2);
+    padding: 11px 13px;
+    border-radius: 14px;
+    margin-bottom: 10px;
+    margin-left: 25px;
+    line-height: 1.5;
+}
+
+.ai-input-area {
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    border-top: 1px solid var(--border);
+}
+
+.ai-input-area input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: none;
+    border-radius: 12px;
+    padding: 11px;
+    background: var(--card2);
+    color: white;
+}
+
+.ai-input-area button {
+    width: 45px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--primary);
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* İşıqlı rejim */
+
+body.light {
+    --bg: #f5f3f8;
+    --card: #ffffff;
+    --card2: #eeeaf3;
+    --text: #17121d;
+    --muted: #6d6574;
+    --border: rgba(0,0,0,0.08);
+}
+
+body.light .search-box input,
+body.light .ai-input-area input {
+    color: #17121d;
+}
+
+body.light .setting-item select,
+body.light .setting-item input[type="file"] {
+    color: #17121d;
+}
+
+/* Mobil */
+
+@media (max-width: 600px) {
+
+    .topbar {
+        padding: 14px;
     }
 
-    fontSelect.addEventListener("change", () => {
-
-        const font = fontSelect.value;
-
-        root.style.setProperty(
-            "--font-family",
-            font
-        );
-
-        localStorage.setItem(
-            "luna-font",
-            font
-        );
-    });
-}
-
-
-/* =========================
-   LIGHT / DARK BUTTONS
-   ========================= */
-
-const lightButton =
-    document.getElementById("lightMode");
-
-const darkButton =
-    document.getElementById("darkMode");
-
-if (lightButton) {
-
-    lightButton.addEventListener(
-        "click",
-        () => setTheme("light")
-    );
-}
-
-if (darkButton) {
-
-    darkButton.addEventListener(
-        "click",
-        () => setTheme("dark")
-    );
-}
-
-
-/* =========================
-   RESET CUSTOMIZATION
-   ========================= */
-
-const resetButton =
-    document.getElementById("resetCustomization");
-
-if (resetButton) {
-
-    resetButton.addEventListener("click", () => {
-
-        localStorage.removeItem("luna-theme");
-        localStorage.removeItem("luna-color");
-        localStorage.removeItem("luna-font");
-
-        root.style.setProperty(
-            "--primary",
-            "#8b5cf6"
-        );
-
-        root.style.setProperty(
-            "--font-family",
-            "'Inter', sans-serif"
-        );
-
-        setTheme("dark");
-
-        if (fontSelect) {
-            fontSelect.value =
-                "'Inter', sans-serif";
-        }
-
-        alert("Luna App ayarları sıfırlandı! 🌙");
-    });
-}
-
-
-/* =========================
-   LUNA AI
-   ========================= */
-
-const aiMessages =
-    document.getElementById("aiMessages");
-
-const aiInput =
-    document.getElementById("aiInput");
-
-const aiSend =
-    document.getElementById("aiSend");
-
-
-function addAIMessage(text, type) {
-
-    if (!aiMessages) return;
-
-    const message =
-        document.createElement("div");
-
-    message.className =
-        `ai-message ${type}`;
-
-    message.textContent = text;
-
-    aiMessages.appendChild(message);
-
-    aiMessages.scrollTop =
-        aiMessages.scrollHeight;
-}
-
-
-/*
-   Bu hissə hələ demo cavab sistemidir.
-   Real AI üçün təhlükəsiz backend bağlantısı
-   əlavə etmək lazımdır.
-*/
-
-function lunaAI(message) {
-
-    const text =
-        message.toLowerCase().trim();
-
-    if (
-        text.includes("salam") ||
-        text.includes("hello")
-    ) {
-        return "Salam! 😊 Mən Luna AI-yam. Sənə necə kömək edə bilərəm?";
+    .logo {
+        font-size: 18px;
     }
 
-    if (
-        text.includes("necəsən") ||
-        text.includes("necesen")
-    ) {
-        return "Çox yaxşıyam! 🌙 Səninlə söhbət etməyə hazıram.";
+    .search-box input {
+        width: 90px;
     }
 
-    if (
-        text.includes("adın nədir") ||
-        text.includes("adin nedir")
-    ) {
-        return "Mənim adım Luna AI-dır. 🤖🌙";
+    .container {
+        padding: 25px 14px 100px;
     }
 
-    if (
-        text.includes("luna")
-    ) {
-        return "Luna App-in süni intellekt köməkçisiyəm. 💜";
+    .welcome h1 {
+        font-size: 30px;
     }
 
-    return "Maraqlı sualdır! 🤖 Hazırda Luna AI demo rejimindədir. Real süni intellekt cavabları üçün AI server bağlantısı əlavə edilməlidir.";
+    .app-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ai-window {
+        right: 10px;
+        bottom: 85px;
+        width: calc(100vw - 20px);
+    }
 }
-
-
-function sendAIMessage() {
-
-    if (!aiInput) return;
-
-    const message =
-        aiInput.value.trim();
-
-    if (!message) return;
-
-    addAIMessage(message, "user");
-
-    aiInput.value = "";
-
-    setTimeout(() => {
-
-        const answer =
-            lunaAI(message);
-
-        addAIMessage(answer, "bot");
-
-    }, 500);
-}
-
-
-if (aiSend) {
-
-    aiSend.addEventListener(
-        "click",
-        sendAIMessage
-    );
-}
-
-
-if (aiInput) {
-
-    aiInput.addEventListener(
-        "keydown",
-        event => {
-
-            if (event.key === "Enter") {
-                sendAIMessage();
-            }
-
-        }
-    );
-}
-
-
-/* =========================
-   START MESSAGE
-   ========================= */
-
-if (aiMessages) {
-
-    addAIMessage(
-        "Salam! 🌙 Mən Luna AI-yam. Mənə bir şey yaz.",
-        "bot"
-    );
-}
-
-console.log("🌙 Luna App hazırdır!");
