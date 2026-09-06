@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Luna App</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="container nav">
+        <a href="#" class="logo">
+            <span class="logo-icon">🌙</span>
+            <span>Luna App</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="#apps">Tətbiqlər</a>
+            <a href="#updates">Yeniləmələr</a>
+            <a href="#about">Haqqımızda</a>
+        </nav>
+
+        <button id="themeBtn" class="theme-btn" aria-label="Tema dəyiş">
+            ☀️
+        </button>
+    </div>
+</header>
+
+
+<main>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container hero-content">
+
+            <div class="hero-text">
+                <div class="badge">
+                    ✨ YENİ NƏSİL TƏTBİQ MƏRKƏZİ
+                </div>
+
+                <h1>
+                    Luna <span>App</span>
+                </h1>
+
+                <p>
+                    Sevdiyin tətbiqləri kəşf et, yenilikləri izlə və
+                    Luna dünyasının rəngarəng tətbiqlərindən istifadə et.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#apps" class="btn primary">
+                        🚀 Tətbiqlərə bax
+                    </a>
+
+                    <a href="#about" class="btn secondary">
+                        ℹ️ Daha çox
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="orb orb-one"></div>
+                <div class="orb orb-two"></div>
+
+                <div class="phone-card">
+                    <div class="phone-top">
+                        <span>9:41</span>
+                        <span>● ● ●</span>
+                    </div>
+
+                    <div class="moon-big">🌙</div>
+
+                    <h3>Luna App</h3>
+                    <p>Everything you need.</p>
+
+                    <div class="mini-icons">
+                        <div>🎵</div>
+                        <div>🎬</div>
+                        <div>🛠️</div>
+                        <div>🖼️</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- APPS -->
+    <section id="apps" class="section">
+        <div class="container">
+
+            <div class="section-title">
+                <div>
+                    <span class="small-title">KƏŞF ET</span>
+                    <h2>Luna tətbiqləri</h2>
+                </div>
+
+                <div class="search-box">
+                    <span>🔎</span>
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Tətbiq axtar..."
+                    >
+                </div>
+            </div>
+
+
+            <div class="categories">
+                <button class="category active" data-category="all">
+                    Hamısı
+                </button>
+
+                <button class="category" data-category="music">
+                    🎵 Musiqi
+                </button>
+
+                <button class="category" data-category="video">
+                    🎬 Video
+                </button>
+
+                <button class="category" data-category="tools">
+                    🛠️ Alətlər
+                </button>
+            </div>
+
+
+            <div id="appGrid" class="app-grid">
+                <!-- Tətbiqlər JavaScript ilə gələcək -->
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- UPDATES -->
+    <section id="updates" class="section updates-section">
+        <div class="container">
+
+            <div class="section-heading">
+                <span class="small-title">SON YENİLƏMƏLƏR</span>
+                <h2>Yeniliklər</h2>
+                <p>
+                    Luna tətbiqlərinin ən son versiyalarını buradan izləyə bilərsən.
+                </p>
+            </div>
+
+            <div id="updatesList" class="timeline">
+                <!-- Yeniləmələr JavaScript ilə gələcək -->
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ABOUT -->
+    <section id="about" class="section about-section">
+        <div class="container about-card">
+
+            <div class="about-icon">
+                🌙
+            </div>
+
+            <div>
+                <span class="small-title">LUNA APP</span>
+
+                <h2>Sadə, sürətli və rəngarəng.</h2>
+
+                <p>
+                    Luna App müxtəlif tətbiqləri bir yerdə kəşf etməyin
+                    rahat yolu üçün hazırlanmış müasir platformadır.
+                    Burada musiqi, video, alətlər və digər Luna
+                    layihələrini tapa bilərsən.
+                </p>
+
+                <div class="about-features">
+                    <span>⚡ Sürətli</span>
+                    <span>🎨 Rəngarəng</span>
+                    <span>📱 Mobil uyğun</span>
+                    <span>🔄 Daim yenilənir</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container footer-content">
+
+        <div class="footer-logo">
+            🌙 <strong>Luna App</strong>
+        </div>
+
+        <p>
+            © 2026 Luna App. Bütün hüquqlar qorunur.
+        </p>
+
+        <div class="footer-links">
+            <a href="#apps">Tətbiqlər</a>
+            <a href="#updates">Yeniləmələr</a>
+            <a href="#about">Haqqımızda</a>
+        </div>
+
+    </div>
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
