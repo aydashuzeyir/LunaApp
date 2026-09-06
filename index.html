@@ -1,170 +1,238 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luna App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
+    <title>Luna App</title>
+    <meta name="description" content="Luna App - musiqi, video, AI və daha çoxu.">
 
-body {
-    min-height: 100vh;
-    color: white;
-    background: linear-gradient(135deg, #08001a, #160044, #300080);
-}
-
-header {
-    text-align: center;
-    padding: 28px 15px;
-}
-
-.logo {
-    font-size: 38px;
-    font-weight: bold;
-}
-
-.logo span {
-    color: #b66cff;
-}
-
-.subtitle {
-    margin-top: 8px;
-    color: #cfc4e8;
-}
-
-.container {
-    max-width: 900px;
-    margin: auto;
-    padding: 15px 20px 35px;
-}
-
-.hero {
-    text-align: center;
-    padding: 45px 10px;
-}
-
-.hero h1 {
-    font-size: 40px;
-    margin-bottom: 15px;
-}
-
-.hero p {
-    color: #d5cde5;
-    font-size: 18px;
-    line-height: 1.5;
-}
-
-button {
-    border: none;
-    padding: 15px 25px;
-    margin: 10px 5px;
-    border-radius: 30px;
-    background: #9d4edd;
-    color: white;
-    font-size: 16px;
-}
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 18px;
-}
-
-.card {
-    background: #ffffff12;
-    border: 1px solid #ffffff20;
-    border-radius: 20px;
-    padding: 25px;
-    text-align: center;
-}
-
-.icon {
-    font-size: 38px;
-    margin-bottom: 12px;
-}
-
-.card h3 {
-    margin-bottom: 10px;
-}
-
-.card p {
-    color: #c8bfd8;
-    line-height: 1.4;
-}
-
-footer {
-    text-align: center;
-    padding: 30px;
-    color: #aaa0b9;
-}
-</style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
-    <div class="logo">🌙 <span>Luna</span> App</div>
-    <div class="subtitle">Sənin rəqəmsal dünyan</div>
-</header>
+    <!-- ÜST HİSSƏ -->
+    <header class="topbar">
 
-<div class="container">
-
-    <section class="hero">
-        <h1>Luna App-ə xoş gəlmisən 🌙</h1>
-
-        <p>
-            Musiqi, video və süni intellekt
-            funksiyalarını bir yerdə toplayan tətbiq.
-        </p>
-
-        <button onclick="alert('Luna APK tezliklə hazır olacaq!')">
-            📱 APK
-        </button>
-
-        <button onclick="alert('Luna AI hazırlanır 🤖')">
-            🤖 Luna AI
-        </button>
-    </section>
-
-    <section class="cards">
-
-        <div class="card">
-            <div class="icon">🎵</div>
-            <h3>Musiqi</h3>
-            <p>Sevdiyin musiqiləri dinlə.</p>
+        <div class="logo">
+            🌙 <span>Luna App</span>
         </div>
 
-        <div class="card">
-            <div class="icon">🎬</div>
-            <h3>Video</h3>
-            <p>Videolar üçün Luna Player.</p>
+        <div class="top-actions">
+
+            <!-- Axtarış -->
+            <div class="search-box">
+                🔍
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Axtar..."
+                    autocomplete="off"
+                >
+            </div>
+
+            <!-- Ayarlar -->
+            <button id="settingsButton" class="icon-button" title="Ayarlar">
+                ⚙️
+            </button>
+
         </div>
 
-        <div class="card">
-            <div class="icon">🤖</div>
-            <h3>Luna AI</h3>
-            <p>Süni intellektlə söhbət et.</p>
+    </header>
+
+
+    <!-- ƏSAS HİSSƏ -->
+    <main class="container">
+
+        <section class="welcome">
+            <h1>Luna App 🌙</h1>
+            <p>Sevdiyin tətbiqlər və xidmətlər bir yerdə.</p>
+        </section>
+
+
+        <!-- TƏTBİQ KARTLARI -->
+        <section class="app-section">
+
+            <div class="section-title">
+                <h2>Tətbiqlər</h2>
+            </div>
+
+            <div class="app-grid" id="appGrid">
+
+                <div class="app-card" data-name="Luna Music musiqi">
+                    <div class="app-icon music-icon">🎵</div>
+                    <div class="app-info">
+                        <h3>Luna Music</h3>
+                        <p>Musiqilərini dinlə</p>
+                    </div>
+                    <button onclick="openMusic()">Aç</button>
+                </div>
+
+
+                <div class="app-card" data-name="Luna Video video">
+                    <div class="app-icon video-icon">🎬</div>
+                    <div class="app-info">
+                        <h3>Luna Video</h3>
+                        <p>Videolarına bax</p>
+                    </div>
+                    <button onclick="openVideo()">Aç</button>
+                </div>
+
+
+                <div class="app-card" data-name="Luna Tools alətlər">
+                    <div class="app-icon tools-icon">🛠️</div>
+                    <div class="app-info">
+                        <h3>Luna Tools</h3>
+                        <p>Faydalı alətlər</p>
+                    </div>
+                    <button onclick="openTools()">Aç</button>
+                </div>
+
+            </div>
+
+            <p id="noResults" class="no-results">
+                Heç nə tapılmadı.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- AYARLAR PANELİ -->
+    <div id="settingsPanel" class="popup">
+
+        <div class="popup-content">
+
+            <div class="popup-header">
+                <h2>⚙️ Ayarlar</h2>
+                <button id="closeSettings" class="close-button">✕</button>
+            </div>
+
+
+            <div class="setting-item">
+                <label>🌗 Görünüş</label>
+
+                <select id="themeSelect">
+                    <option value="dark">Qaranlıq</option>
+                    <option value="light">İşıqlı</option>
+                </select>
+            </div>
+
+
+            <div class="setting-item">
+                <label>🎨 Rəng</label>
+
+                <select id="colorSelect">
+                    <option value="purple">Bənövşəyi</option>
+                    <option value="blue">Mavi</option>
+                    <option value="pink">Çəhrayı</option>
+                    <option value="green">Yaşıl</option>
+                    <option value="red">Qırmızı</option>
+                    <option value="orange">Narıncı</option>
+                    <option value="cyan">Mavi-yaşıl</option>
+                </select>
+            </div>
+
+
+            <div class="setting-item">
+                <label>🔤 Yazı tipi</label>
+
+                <select id="fontSelect">
+                    <option value="system">System</option>
+                    <option value="arial">Arial</option>
+                    <option value="georgia">Georgia</option>
+                    <option value="verdana">Verdana</option>
+                    <option value="monospace">Monospace</option>
+                </select>
+            </div>
+
+
+            <div class="setting-item">
+                <label>🔵 İkon rəngi</label>
+
+                <input
+                    type="color"
+                    id="iconColor"
+                    value="#9b5cff"
+                >
+            </div>
+
+
+            <div class="setting-item">
+                <label>🖼️ Luna ikonunu dəyiş</label>
+
+                <input
+                    type="file"
+                    id="iconUpload"
+                    accept="image/*"
+                >
+            </div>
+
+
+            <button id="resetSettings" class="reset-button">
+                🔄 Ayarları sıfırla
+            </button>
+
         </div>
 
-        <div class="card">
-            <div class="icon">📥</div>
-            <h3>Yükləmələr</h3>
-            <p>Fayllarını rahat idarə et.</p>
+    </div>
+
+
+    <!-- LUNA AI DÜYMƏSİ -->
+    <button id="aiFloatingButton" class="ai-floating-button" title="Luna AI">
+        🤖
+    </button>
+
+
+    <!-- LUNA AI PƏNCƏRƏSİ -->
+    <div id="aiWindow" class="ai-window">
+
+        <div class="ai-header">
+
+            <div>
+                <strong>🤖 Luna AI</strong>
+                <small>AI köməkçin</small>
+            </div>
+
+            <button id="closeAI" class="close-button">
+                ✕
+            </button>
+
         </div>
 
-    </section>
 
-</div>
+        <div id="aiMessages" class="ai-messages">
 
-<footer>
-    © 2026 Luna App 🌙
-</footer>
+            <div class="ai-message">
+                Salam! Mən Luna AI-yam 🌙
+                <br>
+                Mənə sualını yaza bilərsən.
+            </div>
+
+        </div>
+
+
+        <div class="ai-input-area">
+
+            <input
+                type="text"
+                id="aiInput"
+                placeholder="Sualını yaz..."
+                autocomplete="off"
+            >
+
+            <button id="sendAI">
+                ➤
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
 
 </body>
 </html>
